@@ -1,58 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffffff"
-    android:padding="10dp" >
-    <LinearLayout
+    android:padding="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textColor="#FF00"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/imagePersonHead"
+        <com.hzn.easypickerview.EasyPickerView
+            android:id="@+id/epv_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_launcher_background" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/textName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dave"
-                android:textColor="#FF00" />
-            <TextView
-                android:id="@+id/textEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="\@123.net"
-                android:textColor="#FF00" />
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/imagePerson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_home_black_24dp" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A Dialog"
-        android:textColor="#FF00" />
-
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            custom:epvMaxShowNum="3"
+            custom:epvRecycleMode="true"
+            custom:epvTextColor="#4aa4a4"
+            custom:epvTextMaxScale="2.0"
+            custom:epvTextMinAlpha="0.35"
+            custom:epvTextPadding="10dp"
+            custom:epvTextSize="30sp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
 </LinearLayout>

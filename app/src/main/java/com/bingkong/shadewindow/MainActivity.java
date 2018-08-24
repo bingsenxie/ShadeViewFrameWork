@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -16,10 +17,56 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.TextView;
 import com.bingkong.shadewindow.R;
+import com.hzn.easypickerview.EasyPickerView;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
+    private EasyPickerView epvH;
+    private EasyPickerView epvM;
     private TextView mTextMessage;
     private Dialog dialog;
+
+    private void InitEPVh() {
+        /*
+        epvH = (EasyPickerView) findViewById(R.id.epv_h);
+        final ArrayList<String> hDataList = new ArrayList<>();
+        for (int i = 0; i < 24; i++)
+            hDataList.add("" + i);
+        epvH.setDataList(hDataList);
+        epvH.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(int curIndex) {
+                Log.e("MainActivity", "onScrollChanged: curIndex="+curIndex );
+            }
+            @Override
+            public void onScrollFinished(int curIndex) {
+                Log.e("MainActivity", "onScrollFinished: curIndex="+curIndex );
+            }
+        });
+       */
+    }
+
+    private void InitEPVm(EasyPickerView epvM) {
+
+        final ArrayList<String> hDataList = new ArrayList<>();
+        for (int i = 0; i < 12; i++)
+            hDataList.add("" + i);
+
+        epvM.setDataList(hDataList);
+        epvM.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(int curIndex) {
+                Log.e("MainActivity", "onScrollChanged: curIndex="+curIndex );
+            }
+
+            @Override
+            public void onScrollFinished(int curIndex) {
+                Log.e("MainActivity", "onScrollFinished: curIndex="+curIndex );
+            }
+        });
+    }
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -46,14 +93,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
     }
     public void mengcengDialog() {
         dialog= new Dialog(this, R.style.custom_dialog);
         dialog.setContentView(R.layout.dialoglayout);
+        epvM = (EasyPickerView) dialog.findViewById(R.id.epv_m);
+        InitEPVm(epvM);
         WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -65,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
         lp.width = dm.widthPixels; // 宽度
         lp.height = dm.heightPixels/2; // 高度
         dialog.getWindow().setAttributes(lp);
+
         dialog.show();
+
     }
 
 
