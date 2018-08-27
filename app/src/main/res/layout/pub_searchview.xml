@@ -10,14 +10,12 @@
         android:layout_marginTop="1dp"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
             <FrameLayout
                 android:id="@+id/toolbarv2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/iv_menubtn"
+
                 >
                 <RelativeLayout
                     android:id="@+id/searchwaitcommand"
@@ -62,19 +60,18 @@
                         android:id="@+id/et_search"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-
                         android:layout_toRightOf="@+id/iv_searchicon"
                         android:layout_toEndOf="@+id/iv_searchicon"
                         android:layout_toLeftOf="@+id/bt_clear"
                         android:layout_toStartOf="@+id/bt_clear"
-
+                        android:textCursorDrawable="@null"
                         android:layout_marginStart="2dp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:layout_marginEnd="2dp"
                         android:background="@null"
+                        android:singleLine="true"
                         android:imeOptions="actionSearch"
-                        android:lines="1"
                         android:ellipsize="end"
                         android:textColor="@color/colorWhite"
                         android:textSize="13sp"
@@ -91,14 +88,7 @@
                         android:src="@mipmap/delete" />
                 </RelativeLayout>
             </FrameLayout>
-            <ImageView
-                android:id="@+id/iv_menubtn"
-                android:src="@mipmap/ic_listmenu"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-        </RelativeLayout>
+
     </LinearLayout>
 </LinearLayout>
 

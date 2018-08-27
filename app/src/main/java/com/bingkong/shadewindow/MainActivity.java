@@ -23,8 +23,6 @@ import com.hzn.easypickerview.EasyPickerView;
 
 import java.util.ArrayList;
 
-import cn.bluemobi.dylan.searchview.SearchView;
-
 public class MainActivity extends AppCompatActivity {
 
     private EasyPickerView epvH;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private Dialog dialog;
 
-    SearchView sv=null;
+    BkSearchView sv=null;
     private void InitEPVh() {
         /*
         epvH = (EasyPickerView) findViewById(R.id.epv_h);
@@ -99,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = (TextView) findViewById(R.id.message);
-        sv=(SearchView) findViewById(R.id.mSearchView);
-        sv.setOnChangeListener(new SearchView.OnChangeListener() {
+        sv=(BkSearchView) findViewById(R.id.mSearchView);
+        sv.setOnChangeListener(new BkSearchView.OnChangeListener() {
             @Override
             public void onChange(int type,String content) {
-                    if(type==SearchView.SEARCH_INPUT_TEXT) {
+                    if(type==BkSearchView.SEARCH_INPUT_TEXT) {
                         Toast.makeText(MainActivity.this,
                                 "Get input text["+content+"]",
                                 Toast.LENGTH_LONG).show();

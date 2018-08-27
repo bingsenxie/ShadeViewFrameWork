@@ -23,12 +23,21 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <cn.bluemobi.dylan.searchview.SearchView
+                <com.bingkong.shadewindow.BkSearchView
                     android:id="@+id/mSearchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_menubtn"
+                    android:layout_toStartOf="@+id/iv_menubtn"
                     >
-                </cn.bluemobi.dylan.searchview.SearchView>
+                </com.bingkong.shadewindow.BkSearchView>
+                <ImageView
+                    android:id="@+id/iv_menubtn"
+                    android:src="@mipmap/ic_listmenu"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
             </RelativeLayout>
         </LinearLayout>
 

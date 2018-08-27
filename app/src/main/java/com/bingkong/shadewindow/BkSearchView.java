@@ -1,4 +1,4 @@
-package cn.bluemobi.dylan.searchview;
+package com.bingkong.shadewindow;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -8,15 +8,18 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bingkong.shadewindow.MainActivity;
 import com.bingkong.shadewindow.R;
@@ -24,30 +27,38 @@ import com.bingkong.shadewindow.R;
 import java.util.List;
 
 /**
- * Android自定义SearchView
- * Created by yuandl on 2016-11-17.
+ * Android自定义BkSearchView
  */
-
-public class SearchView extends LinearLayout implements TextWatcher, View.OnClickListener {
+public class BkSearchView extends LinearLayout implements TextWatcher, View.OnClickListener {
 
     public static final int SEARCH_INPUT_TEXT=0;
+    public static final int SEARCH_STATE_INSEARCHING=1;
+
     /**
-     * 输入框
+     *
+     * input text edit view.
      */
     private EditText et_search;
+
     /**
-     * 输入框后面的那个清除按钮
+     * clear button
      */
     private ImageView bt_clear;
+
     /**
-     * 输入框后面的那个搜索按钮
+     *search button
      */
     private ImageView bt_searchbtn;
+    /*indicator search icon*/
     private ImageView bt_searchicon;
     RelativeLayout inputsearchkeylayout;
     RelativeLayout waitingsearchlayout;
 
+    //The state of search view.
+    private int mState;
+
     Context mContext;
+
     public interface OnChangeListener {
         void onChange(int type,String content);
     }
@@ -57,7 +68,7 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
     }
 
 
-    public SearchView(final Context context, AttributeSet attrs) {
+    public BkSearchView(final Context context, AttributeSet attrs) {
         super(context, attrs);
         /**加载布局文件*/
         mContext=context;
@@ -98,8 +109,24 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
                 */
             }
         });
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    mState = SEARCH_STATE_INSEARCHING;
+                    InputMethodManager imm =
+                            (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    imm.hideSoftInputFromWindow(et_search.getWindowToken(), 0);//close SoftKeyboard.
+                    //tell observer, the input key is finished, and can search now.
+                    String input = et_search.getText().toString().trim();
+                    if(mListener!=null)  mListener.onChange(SEARCH_INPUT_TEXT,input);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
-
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
