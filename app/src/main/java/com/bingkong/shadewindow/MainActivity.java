@@ -16,10 +16,14 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bingkong.shadewindow.R;
 import com.hzn.easypickerview.EasyPickerView;
 
 import java.util.ArrayList;
+
+import cn.bluemobi.dylan.searchview.SearchView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private Dialog dialog;
 
+    SearchView sv=null;
     private void InitEPVh() {
         /*
         epvH = (EasyPickerView) findViewById(R.id.epv_h);
@@ -94,6 +99,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = (TextView) findViewById(R.id.message);
+        sv=(SearchView) findViewById(R.id.mSearchView);
+        sv.setOnChangeListener(new SearchView.OnChangeListener() {
+            @Override
+            public void onChange(int type,String content) {
+                    if(type==SearchView.SEARCH_INPUT_TEXT) {
+                        Toast.makeText(MainActivity.this,
+                                "Get input text["+content+"]",
+                                Toast.LENGTH_LONG).show();
+                    }
+            }
+        });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -115,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
         lp.width = dm.widthPixels; // 宽度
         lp.height = dm.heightPixels/2; // 高度
         dialog.getWindow().setAttributes(lp);
-
         dialog.show();
-
     }
 
 
